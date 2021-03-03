@@ -1,14 +1,14 @@
-import './App.css';
+import './styles/App.css';
 
-import Row from './Row'
+import Row from './components/Row'
 
-import Banner from "./Banner" 
+import Banner from "./components/Banner" 
 
-import Nav from "./Nav"
+import Nav from "./components/Nav"
 
 import requests from "./requests"
 
-import "./App.css"
+import "./styles/App.css"
 
 
 function App() {
