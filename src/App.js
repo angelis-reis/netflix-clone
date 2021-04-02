@@ -1,17 +1,16 @@
+import React, { useState, useEffect } from "react";
 import './styles/App.css';
-
 import Row from './components/Row'
-
 import Banner from "./components/Banner" 
-
 import Nav from "./components/Nav"
-
 import requests from "./requests"
-
 import "./styles/App.css"
+import Card from "./components/Card"
 
 
 function App() {
+
+  const [showCard, setShowCard] = useState(true);
 
   
 
@@ -28,6 +27,9 @@ function App() {
       <Row title= "Horror Movies" fetchURL={requests.fetchHorrorMovies} />
       <Row title= "Romance Movies" fetchURL={requests.fetchRomanceMovies} />
       <Row title= "Documentaries" fetchURL={requests.fetchDocumentaires} />
+
+      { showCard && <Card showCard={showCard} /> }
+
     </div>
   );
 }

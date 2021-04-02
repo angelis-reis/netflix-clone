@@ -3,14 +3,13 @@ import axios from "axios";
 import Youtube from "react-youtube";
 import movieTrailer from "movie-trailer";
 import "../styles/row.css"
-import Card from "./Card"
 
 const base_url = "https://image.tmdb.org/t/p/original/";
 
 function Row({ title, fetchURL, isLargeRow }) {
 
   const [movies, setMovies] = useState([]); 
-  const [showCard, setShowCard] = useState(false);
+  
   const [trailerUrl, setTrailerUrl] = useState(null);
   // roda quando a a Row for renderizada
   // como um componentDidMount
@@ -73,7 +72,7 @@ function Row({ title, fetchURL, isLargeRow }) {
     console.log("movieTemp fim: ", movieTemp)
   };
 
-  /* const handleClick = () => {
+  /* const handleClick = (movie) => {
 
     console.log('Koca: click ', );
 
@@ -84,7 +83,9 @@ function Row({ title, fetchURL, isLargeRow }) {
 
   return (
     <div className="row">
+
       <h2>{title}</h2>
+
       <div className="row_posters">
         {/* {several row posters} */}
 
@@ -97,16 +98,9 @@ function Row({ title, fetchURL, isLargeRow }) {
               alt={movie.name}
               className={`row_poster ${isLargeRow && "row_posterLarge"}`}
             />
-
-            <Card movie={movie} showCard={showCard} /> 
-
           </>
-
-
         ))}
       </div>
-
-      
 
       {/* {trailerUrl && <Youtube videoId = {trailerUrl} opts={opts} /> } */}
       {/* <Youtube videoId = {trailerUrl} opts={opts} /> */}
