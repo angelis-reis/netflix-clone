@@ -8,9 +8,13 @@ const base_url = "https://image.tmdb.org/t/p/original/";
 
 function Row({ title, fetchURL, isLargeRow }) {
 
-  const [movies, setMovies] = useState([]); 
+  const [movies, setMovies] = useState([]);
+  const [selectedMovie, setSelectedMovie] = useState([]);
+  const [showCard, setShowCard] = useState(true);
   
   const [trailerUrl, setTrailerUrl] = useState(null);
+
+
   // roda quando a a Row for renderizada
   // como um componentDidMount
   useEffect(() => {
@@ -34,7 +38,7 @@ function Row({ title, fetchURL, isLargeRow }) {
 
   var movieTemp
 
-  const handleClick = (movie) => {
+  /* const handleClick = (movie) => {
 
     console.log("apertou imagem")
     console.log("movieTemp inicio: ", movieTemp)
@@ -70,16 +74,26 @@ function Row({ title, fetchURL, isLargeRow }) {
 
     movieTemp = movie.name
     console.log("movieTemp fim: ", movieTemp)
-  };
+  }; */
 
-  /* const handleClick = (movie) => {
+  const handleClick = (movie) => {
 
-    console.log('Koca: click ', );
+    console.log('Koca: click ', )
 
     setShowCard((prevState) =>{
       setShowCard(!prevState)
     })
-  } */
+
+    setSelectedMovie(movie)
+  }
+
+  useEffect(() => {
+
+    console.log('Koca selectedMovie: ', selectedMovie );
+    console.log('Koca ShowCard: ', showCard );
+    
+
+  }, [selectedMovie]);
 
   return (
     <div className="row">

@@ -21,9 +21,6 @@ function Banner() {
         fetchData();      
 
     }, [requests.fetchTrending]);
-    
-
-    console.log("MOVIE: ",movie);
 
     function truncate(str,n){
         return(

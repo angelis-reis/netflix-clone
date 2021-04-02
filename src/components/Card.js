@@ -1,9 +1,9 @@
 import React from 'react'
 import styled from "styled-components";
 
-const StyledCard= styled.div`
+const base_url = "https://image.tmdb.org/t/p/original/";
 
-   
+const StyledCard= styled.div`
     
     .card {
     width: 1200px;
@@ -169,7 +169,35 @@ const StyledCard= styled.div`
 
 `;
 
-const Card = ({ showCard }) =>{   
+
+
+   /*  backdrop_path: "/ta5oblpMlEcIPIS2YGcq9XEkWK2.jpg"
+    ​
+    first_air_date: "2016-01-25"
+    ​
+    genre_ids: Array [ 80, 10765 ]
+    ​
+    id: 63174
+    ​
+    name: "Lucifer"
+    ​
+    origin_country: Array [ "US" ]
+    ​
+    original_language: "en"
+    ​
+    original_name: "Lucifer"
+    ​
+    overview: "Bored and unhappy as the Lord of Hell, Lucifer Morningstar abandoned his throne and retired to Los Angeles, where he has teamed up with LAPD detective Chloe Decker to take down criminals. But the longer he's away from the underworld, the greater the threat that the worst of humanity could escape."
+    ​
+    popularity: 760.397
+    ​
+    poster_path: "/4EYPN5mVIhKLfxGruy7Dy41dTVn.jpg"
+    ​
+    vote_average: 8.5
+    ​
+    vote_count: 8076 */
+
+const Card = ({ showCard, selectedMovie }) =>{   
 
     /* { showCard ? <h1>true</h1> : null } */
 
@@ -180,17 +208,18 @@ const Card = ({ showCard }) =>{
             <div className='card'>
 
                 <div className='card_left'>
-                    <img src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/343086/h8fnwL1.png' />
+                            
+                    <img src={`${base_url}${selectedMovie.poster_path}`} />
                 </div>
 
                 <div className='card_right'>
 
-                    <h1>KILL  BILL:  VOL.  1</h1>
+                    <h1>{selectedMovie.name}</h1>
 
                     <div className='card_right__details'>
 
                         <ul>
-                            <li>2003</li>
+                            <li>{ selectedMovie.first_air_date }</li>
                             <li>111 min</li>
                             <li>Action</li>
                         </ul>
@@ -199,7 +228,7 @@ const Card = ({ showCard }) =>{
 
                             <div className='card_right__rating__stars'>
 
-                                <fieldset className='rating'>
+                                {/* <fieldset className='rating'>
 
                                     <input id='star10' name='rating' type='radio' value='10'>
                                     </input>
@@ -262,20 +291,20 @@ const Card = ({ showCard }) =>{
                                     </input>
                                     <label className='half' for='starhalf' title='0.5 stars'></label>
                                     
-                                </fieldset>
+                                </fieldset> */}
 
                             </div>
 
                         </div>
 
                         <div className='card_right__review'>
-                            <p>The lead character, called 'The Bride,' was a member <br/> of the Deadly Viper Assassination Squad, led by her <br/> lover 'Bill.' Upon realizing she was pregnant with Bill's<br/> child, 'The Bride' decided to escape her life as a killer.<br/> She fled to Texas, met a young man, who, on the day<br/> of their wedding rehearsal was gunned down by....</p>
-                            <a href='http://www.imdb.com/title/tt0266697/plotsummary?ref_=tt_stry_pl' target='_blank'>Saiba mais</a>
+                            <p>{ selectedMovie.overview }</p>
+                            {/* <a href='http://www.imdb.com/title/tt0266697/plotsummary?ref_=tt_stry_pl' target='_blank'>Saiba mais</a> */}
                         </div>
 
-                        <div className='card_right__button'>
+                        {/* <div className='card_right__button'>
                             <a href='https://www.youtube.com/watch?v=ot6C1ZKyiME' target='_blank'>ASSISTIR TRAILER</a>
-                        </div>
+                        </div> */}
 
                     </div>
 
