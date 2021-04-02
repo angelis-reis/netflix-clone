@@ -1,11 +1,7 @@
 import React, { useState, useEffect } from "react";
-
 import axios from "axios";
-
 import Youtube from "react-youtube";
-
 import movieTrailer from "movie-trailer";
-
 import "../styles/row.css"
 
 const base_url = "https://image.tmdb.org/t/p/original/";
@@ -22,15 +18,10 @@ function Row({ title, fetchURL, isLargeRow }) {
   useEffect(() => {
     async function fetchData() {
       const request = await axios.get(fetchURL);
-
       setMovies(request.data.results);
-
       return request;
     }
-
     fetchData();
-    
-
     //    tenho que colocar esse props (fetchURL) aqui para que renderize cada vez que eu atualizar o valor dele
   }, [fetchURL]);
 
