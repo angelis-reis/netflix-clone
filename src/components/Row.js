@@ -8,13 +8,15 @@ const base_url = "https://image.tmdb.org/t/p/original/";
 
 function Row({ title, fetchURL, isLargeRow }) {
 
-  const [movies, setMovies] = useState([]);  
-
+  const [movies, setMovies] = useState([]);
+  const [selectedMovie, setSelectedMovie] = useState([]);
+  const [showCard, setShowCard] = useState(true);
+  
   const [trailerUrl, setTrailerUrl] = useState(null);
+
 
   // roda quando a a Row for renderizada
   // como um componentDidMount
-
   useEffect(() => {
     async function fetchData() {
       const request = await axios.get(fetchURL);
@@ -32,96 +34,66 @@ function Row({ title, fetchURL, isLargeRow }) {
       autoplay: 1,
       // https://developers.google.com/youtube/player_parameters
     }
-
   }
 
   var movieTemp
 
-<<<<<<< Updated upstream
-  
-
-  
-
-  const handleClick = (movie) => {
-=======
   /* const handleClick = (movie) => {
->>>>>>> Stashed changes
 
     console.log("apertou imagem")
-
     console.log("movieTemp inicio: ", movieTemp)
-
     console.log("movieName: ", movie.name)
 
     if(movie.name == movieTemp){
-
       console.log("é igual")
-
       setTrailerUrl(null)
-
     }
 
     else{
       console.log("else")
-
       if(trailerUrl){    
-
         console.log("existe")
-  
         movieTrailer(movie?.name || "")
-  
         .then( (url) => {
-  
           const urlParams =new URLSearchParams( new URL(url).search);
           setTrailerUrl(urlParams.get("v"));
-         
-  
         }).catch( 
           (error) => 
-            
             setTrailerUrl(null)
           );
-                   
-  
       }
   
       else{
-  
         movieTrailer(movie?.name || "")
-  
         .then( (url) => {
-  
           const urlParams =new URLSearchParams( new URL(url).search);
           setTrailerUrl(urlParams.get("v"));  
         }).catch( (error) => setTrailerUrl(null) );
-        
       }
     }
 
     movieTemp = movie.name
-  
     console.log("movieTemp fim: ", movieTemp)
-<<<<<<< Updated upstream
-
-  };
-
-      
-
-  
-=======
   }; */
 
-  const handleClick = () => {
->>>>>>> Stashed changes
+  const handleClick = (movie) => {
 
+    console.log('Koca: click ', )
 
-<<<<<<< Updated upstream
-=======
     setShowCard((prevState) =>{
       setShowCard(!prevState)
     })
+
+    setSelectedMovie(movie)
   }
->>>>>>> Stashed changes
+
+  useEffect(() => {
+
+    console.log('Koca selectedMovie: ', selectedMovie );
+    console.log('Koca ShowCard: ', showCard );
+    
+
+  }, [selectedMovie]);
 
   return (
     <div className="row">
@@ -132,25 +104,22 @@ function Row({ title, fetchURL, isLargeRow }) {
         {/* {several row posters} */}
 
         {movies.map((movie) => (
-          <img
-            key = {movie.id}
-            onClick = { () => handleClick(movie)}
-            src={`${base_url}${isLargeRow ? movie.poster_path : movie.backdrop_path }`}
-            alt={movie.name}
-            className={`row_poster ${isLargeRow && "row_posterLarge"}`}
-          />
+          <>
+            <img
+              key = {movie.id}
+              onClick = { () => handleClick(movie)}
+              src={`${base_url}${isLargeRow ? movie.poster_path : movie.backdrop_path }`}
+              alt={movie.name}
+              className={`row_poster ${isLargeRow && "row_posterLarge"}`}
+            />
+          </>
         ))}
       </div>
 
-      {trailerUrl && <Youtube videoId = {trailerUrl} opts={opts} /> }
-
+      {/* {trailerUrl && <Youtube videoId = {trailerUrl} opts={opts} /> } */}
       {/* <Youtube videoId = {trailerUrl} opts={opts} /> */}
-
       
     </div>
-
-
-
   );
 }
 
