@@ -37,11 +37,15 @@ function Row({ title, fetchURL, isLargeRow }) {
 
   var movieTemp
 
+<<<<<<< Updated upstream
   
 
   
 
   const handleClick = (movie) => {
+=======
+  /* const handleClick = (movie) => {
+>>>>>>> Stashed changes
 
     console.log("apertou imagem")
 
@@ -97,14 +101,27 @@ function Row({ title, fetchURL, isLargeRow }) {
     movieTemp = movie.name
   
     console.log("movieTemp fim: ", movieTemp)
+<<<<<<< Updated upstream
 
   };
 
       
 
   
+=======
+  }; */
+
+  const handleClick = () => {
+>>>>>>> Stashed changes
 
 
+<<<<<<< Updated upstream
+=======
+    setShowCard((prevState) =>{
+      setShowCard(!prevState)
+    })
+  }
+>>>>>>> Stashed changes
 
   return (
     <div className="row">
