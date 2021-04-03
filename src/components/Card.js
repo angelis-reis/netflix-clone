@@ -1,4 +1,5 @@
 import React, { useContext, useState, useEffect } from "react";
+import { BsFillStarFill } from 'react-icons/bs';
 import styled from "styled-components";
 import { CardContext }  from "../App"
 
@@ -215,15 +216,6 @@ const genres =
         Thriller : 53,
     }
 
-   
-
-    
-
-
-
-
-
-
 
    /*  backdrop_path: "/ta5oblpMlEcIPIS2YGcq9XEkWK2.jpg"
     ​
@@ -291,9 +283,10 @@ const Card = ({ selectedMovie }) =>{
                     <div className='card_right__details'>
 
                         <ul>
-                            <li>{ date }</li>
-                           {/*  <li>111 min</li> */}
+                            <li>{ date }</li>                           
                             <li> { selectedGenre } </li>
+                            <li> { selectedMovie.vote_average } <BsFillStarFill clor={"red"} /> </li>
+                            
                         </ul>
 
                         <div className='card_right__rating'>
