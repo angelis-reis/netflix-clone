@@ -76,18 +76,22 @@ function Row({ title, fetchURL, isLargeRow }) {
   }; */
 
   const handleClick = (movie) => {
-    console.log('Koca: click ', )
-    setShowCard((prevState) =>{
-      setShowCard(!prevState)
-    })
-    setSelectedMovie(movie)
-  }
-
-  useEffect(() => {
-    console.log('Koca selectedMovie: ', selectedMovie );
-    console.log('Koca ShowCard: ', showCard );
     
-  }, [selectedMovie]);
+
+    if (showCard === true) {
+      console.log('Koca: click  era True', )
+      setSelectedMovie(movie)
+
+    }
+    else{
+      setShowCard((prevState) =>{
+        console.log('Koca: click  era False', )
+        setShowCard(!prevState)
+      })
+      setSelectedMovie(movie)
+    }
+    
+  }
 
 
   return (

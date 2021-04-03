@@ -1,5 +1,7 @@
-import React from 'react'
+import React, { useContext, useState, useEffect } from "react";
+import { BsFillStarFill } from 'react-icons/bs';
 import styled from "styled-components";
+import { CardContext }  from "../App"
 
 const base_url = "https://image.tmdb.org/t/p/original/";
 
@@ -22,15 +24,15 @@ const StyledCard= styled.div`
     }
     .card_left {
     width: 40%;
-    height: 600px;
+    height: 800px;
     float: left;
     overflow: hidden;
     background: transparent;
     }
-      .card_left img {
+    .card_left img {
     width: 100%;
     height: auto;
-    border-radius: 10px 0 0 10px;
+    border-radius: 20px 0 0 20px;
     -webkit-border-radius: 10px 0 0 10px;
     -moz-border-radius: 10px 0 0 10px;
     position: relative;
@@ -39,27 +41,42 @@ const StyledCard= styled.div`
     width: 60%;
     float: left;
     background: #000000;
-    height: 600px;
-    border-radius: 0 10px 10px 0;
+    height: 720px;
+    border-radius: 0 20px 20px 0;
     -webkit-border-radius: 0 10px 10px 0;
     -moz-border-radius: 0 10px 10px 0;
+    }
+
+    .close_button {
+        color: black;
+        height: 30px;
+        width: 30px;
+        border-radius: 50%;
+        border-style: none;
+        font-size: 20px;
+        background-color: #ddd;
+        cursor: pointer;
+        right: 20px;
+        top: 20px;
+        position: absolute;
+        
     }
     .card_right h1 {
     color: white;
     font-family: "Montserrat", sans-serif;
     font-weight: 400;
     text-align: left;
-    font-size: 60px;
-    margin: 30px 0 0 0;
+    font-size: 65px;
+    margin: 30px 30px 30px 0;
     padding: 0 0 0 40px;
     letter-spacing: 1px;
     }
-      .card_right__details ul {
+    .card_right__details ul {
     list-style-type: none;
     padding: 0 0 0 40px;
     margin: 10px 0 0 0;
     }
-      .card_right__details ul li {
+    .card_right__details ul li {
     display: inline;
     color: #e3e3e3;
     font-family: "Montserrat", sans-serif;
@@ -80,7 +97,7 @@ const StyledCard= styled.div`
     .card_right__rating__stars .rating {
     border: none;
     }
-      .card_right__rating__stars .rating > input {
+    .card_right__rating__stars .rating > input {
     display: none;
     }
     .card_right__rating__stars .rating > label:before {
@@ -118,13 +135,13 @@ const StyledCard= styled.div`
     .card_right__review p {
     color: white;
     font-family: "Montserrat", sans-serif;
-    font-size: 18px;
+    font-size: 20px;
     padding: 0 40px 0 40px;
     letter-spacing: 1px;
-    margin: 10px 0 10px 0;
-    line-height: 20px;
+    margin: 40px 0 10px 0;
+    line-height: 25px;
     }
-      .card_right__review a {
+    .card_right__review a {
     text-decoration: none;
     font-family: "Montserrat", sans-serif;
     font-size: 21px;
@@ -169,37 +186,82 @@ const StyledCard= styled.div`
 
 `;
 
+const genres = 
+    {
+        Action : 10759,
+        Animation: 16,
+        Comedy : 35,
+        Crime : 80,
+        Documentary : 99,
+        Drama : 18,
+        Family : 10751,
+        Kids : 10762,
+        Mystery : 9648,
+        News : 10763,
+        Reality : 10764,
+        Fantasy : 10765,
+        Soap : 10766,
+        Talk : 10767,
+        War : 10768,
+        Western : 37,
+        ACTION : 28,
+        Adventure : 12,
+        FANTASY : 14,
+        History : 36,
+        Horror : 27,
+        Music : 10402,
+        Romance : 10749,
+        Science : 878,
+        TV : 10770,
+        Thriller : 53,
+    }
 
 
    /*  backdrop_path: "/ta5oblpMlEcIPIS2YGcq9XEkWK2.jpg"
     ​
-    first_air_date: "2016-01-25"
-    ​
-    genre_ids: Array [ 80, 10765 ]
-    ​
-    id: 63174
-    ​
-    name: "Lucifer"
-    ​
-    origin_country: Array [ "US" ]
-    ​
-    original_language: "en"
-    ​
-    original_name: "Lucifer"
-    ​
-    overview: "Bored and unhappy as the Lord of Hell, Lucifer Morningstar abandoned his throne and retired to Los Angeles, where he has teamed up with LAPD detective Chloe Decker to take down criminals. But the longer he's away from the underworld, the greater the threat that the worst of humanity could escape."
-    ​
-    popularity: 760.397
-    ​
-    poster_path: "/4EYPN5mVIhKLfxGruy7Dy41dTVn.jpg"
-    ​
-    vote_average: 8.5
-    ​
+    first_air_date: "2016-01-25"​
+    genre_ids: Array [ 80, 10765 ]​
+    id: 63174​
+    name: "Lucifer"​
+    origin_country: Array [ "US" ]​
+    original_language: "en"​
+    original_name: "Lucifer"​
+    overview: "Bored and unhappy as the Lord of Hell, Lucifer Morningstar abandoned his throne and retired to Los Angeles, where he has teamed up with LAPD detective Chloe Decker to take down criminals. But the longer he's away from the underworld, the greater the threat that the worst of humanity could escape."​
+    popularity: 760.397​
+    poster_path: "/4EYPN5mVIhKLfxGruy7Dy41dTVn.jpg"​
+    vote_average: 8.5​
     vote_count: 8076 */
 
-const Card = ({ showCard, selectedMovie }) =>{   
 
-    /* { showCard ? <h1>true</h1> : null } */
+
+const Card = ({ selectedMovie }) =>{   
+
+    const movieGenreDefinition = () =>{
+
+        const movieGenre = selectedMovie.genre_ids[0]
+        const movieGenres= Object.entries(genres)
+        
+        for(var i = 0; i < movieGenres.length; i++){
+            if(movieGenres[i][1] == movieGenre ){
+                setSelectedGenre(movieGenres[i][0])
+            };
+        };
+    }
+
+    const { showCard, setShowCard } = useContext(CardContext)
+
+    const [date, setDate] = useState("")
+
+    const [selectedGenre, setSelectedGenre] = useState("")
+
+    useEffect(() => {
+        var dateTemp = selectedMovie.first_air_date
+        var date = dateTemp.slice(0,4)
+        console.log("date: ", date)
+        setDate(date)
+        movieGenreDefinition()
+    }, [])    
+
 
     return(
 
@@ -208,20 +270,23 @@ const Card = ({ showCard, selectedMovie }) =>{
             <div className='card'>
 
                 <div className='card_left'>
-                            
                     <img src={`${base_url}${selectedMovie.poster_path}`} />
                 </div>
 
                 <div className='card_right'>
 
                     <h1>{selectedMovie.name}</h1>
+                    <button onClick={ () => { setShowCard(false) } } className='close_button'>
+                        X
+                    </button>
 
                     <div className='card_right__details'>
 
                         <ul>
-                            <li>{ selectedMovie.first_air_date }</li>
-                            <li>111 min</li>
-                            <li>Action</li>
+                            <li>{ date }</li>                           
+                            <li> { selectedGenre } </li>
+                            <li> { selectedMovie.vote_average } <BsFillStarFill clor={"red"} /> </li>
+                            
                         </ul>
 
                         <div className='card_right__rating'>
