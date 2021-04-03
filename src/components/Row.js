@@ -93,12 +93,6 @@ function Row({ title, fetchURL, isLargeRow }) {
     
   }
 
-/*   useEffect(() => {
-    console.log('Koca selectedMovie: ', selectedMovie );
-    console.log('Koca ShowCard: ', showCard );
-    
-  }, [selectedMovie]); */
-
 
   return (
 
