@@ -1,19 +1,20 @@
-import React, { useState, useEffect } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import axios from "axios";
 import Youtube from "react-youtube";
 import movieTrailer from "movie-trailer";
+import { CardContext }  from "../App"
 import "../styles/row.css"
 
 const base_url = "https://image.tmdb.org/t/p/original/";
 
+
 function Row({ title, fetchURL, isLargeRow }) {
 
   const [movies, setMovies] = useState([]);
-  const [selectedMovie, setSelectedMovie] = useState([]);
-  const [showCard, setShowCard] = useState(true);
-  
   const [trailerUrl, setTrailerUrl] = useState(null);
-
+  const { showCard, setShowCard } = useContext(CardContext)
+  
+  const { selectedMovie, setSelectedMovie } = useContext(CardContext)
 
   // roda quando a a Row for renderizada
   // como um componentDidMount
@@ -37,9 +38,7 @@ function Row({ title, fetchURL, isLargeRow }) {
   }
 
   var movieTemp
-
   /* const handleClick = (movie) => {
-
     console.log("apertou imagem")
     console.log("movieTemp inicio: ", movieTemp)
     console.log("movieName: ", movie.name)
@@ -77,50 +76,48 @@ function Row({ title, fetchURL, isLargeRow }) {
   }; */
 
   const handleClick = (movie) => {
-
     console.log('Koca: click ', )
-
     setShowCard((prevState) =>{
       setShowCard(!prevState)
     })
-
     setSelectedMovie(movie)
   }
 
   useEffect(() => {
-
     console.log('Koca selectedMovie: ', selectedMovie );
     console.log('Koca ShowCard: ', showCard );
     
-
   }, [selectedMovie]);
 
+
   return (
-    <div className="row">
 
-      <h2>{title}</h2>
+      <div className="row">
+        <h2>{title}</h2>
 
-      <div className="row_posters">
-        {/* {several row posters} */}
+        <div className="row_posters">
+          {/* {several row posters} */}
 
-        {movies.map((movie) => (
-          <>
-            <img
-              key = {movie.id}
-              onClick = { () => handleClick(movie)}
-              src={`${base_url}${isLargeRow ? movie.poster_path : movie.backdrop_path }`}
-              alt={movie.name}
-              className={`row_poster ${isLargeRow && "row_posterLarge"}`}
-            />
-          </>
-        ))}
+          {movies.map((movie) => (
+            <>
+              <img
+                  key = {movie.id}
+                  onClick = { () => handleClick(movie)}
+                  src={`${base_url}${isLargeRow ? movie.poster_path : movie.backdrop_path }`}
+                  alt={movie.name}
+                  className={`row_poster ${isLargeRow && "row_posterLarge"}`}
+                />  
+            </>
+          ))}
+        </div>
+        {/* {trailerUrl && <Youtube videoId = {trailerUrl} opts={opts} /> } */}
+        {/* <Youtube videoId = {trailerUrl} opts={opts} /> */}
       </div>
-
-      {/* {trailerUrl && <Youtube videoId = {trailerUrl} opts={opts} /> } */}
-      {/* <Youtube videoId = {trailerUrl} opts={opts} /> */}
-      
-    </div>
   );
 }
 
 export default Row;
+
+
+
+                
