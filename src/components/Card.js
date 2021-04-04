@@ -219,18 +219,20 @@ const genres =
 
    /*  backdrop_path: "/ta5oblpMlEcIPIS2YGcq9XEkWK2.jpg"
     ​
-    first_air_date: "2016-01-25"​
+    first_air_date: "2016-01-25"​  release_date
     genre_ids: Array [ 80, 10765 ]​
     id: 63174​
     name: "Lucifer"​
     origin_country: Array [ "US" ]​
     original_language: "en"​
-    original_name: "Lucifer"​
+    original_name: "Lucifer"​  original_title
     overview: "Bored and unhappy as the Lord of Hell, Lucifer Morningstar abandoned his throne and retired to Los Angeles, where he has teamed up with LAPD detective Chloe Decker to take down criminals. But the longer he's away from the underworld, the greater the threat that the worst of humanity could escape."​
     popularity: 760.397​
     poster_path: "/4EYPN5mVIhKLfxGruy7Dy41dTVn.jpg"​
     vote_average: 8.5​
     vote_count: 8076 */
+
+    
 
 
 
@@ -252,15 +254,34 @@ const Card = ({ selectedMovie }) =>{
 
     const [date, setDate] = useState("")
 
+    const [movieName, setMovieName] = useState("")
+
     const [selectedGenre, setSelectedGenre] = useState("")
 
     useEffect(() => {
-        var dateTemp = selectedMovie.first_air_date
-        var date = dateTemp.slice(0,4)
-        console.log("date: ", date)
-        setDate(date)
+
+        if ( selectedMovie.first_air_date != null  ) {
+
+            console.log('Koca: air_date ', );
+            const dateTemp = selectedMovie.first_air_date
+            const date = dateTemp.slice(0,4)
+            console.log("date: ", date)
+            setDate(date)
+            setMovieName(selectedMovie.original_name)
+        }
+        else {
+            console.log('Koca: release_date ', );
+            const dateTemp = selectedMovie.release_date
+            const date = dateTemp.slice(0,4)
+            console.log("date: ", date)
+            setDate(date)
+            setMovieName(selectedMovie.original_title)
+        }
+        
         movieGenreDefinition()
-    }, [])    
+
+        console.log('Koca: ', selectedMovie);
+    }, [])      
 
 
     return(
@@ -275,7 +296,7 @@ const Card = ({ selectedMovie }) =>{
 
                 <div className='card_right'>
 
-                    <h1>{selectedMovie.name}</h1>
+                    <h1>{ movieName }</h1>
                     <button onClick={ () => { setShowCard(false) } } className='close_button'>
                         X
                     </button>
@@ -283,7 +304,7 @@ const Card = ({ selectedMovie }) =>{
                     <div className='card_right__details'>
 
                         <ul>
-                            <li>{ date }</li>                           
+                            <li>{ date}</li>                            
                             <li> { selectedGenre } </li>
                             <li> { selectedMovie.vote_average } <BsFillStarFill clor={"red"} /> </li>
                             

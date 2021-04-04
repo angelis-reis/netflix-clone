@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
 import axios from "axios";
-import Youtube from "react-youtube";
-import movieTrailer from "movie-trailer";
+/* import Youtube from "react-youtube";
+import movieTrailer from "movie-trailer"; */
 import { CardContext }  from "../App"
 import "../styles/row.css"
 
@@ -11,7 +11,7 @@ const base_url = "https://image.tmdb.org/t/p/original/";
 function Row({ title, fetchURL, isLargeRow }) {
 
   const [movies, setMovies] = useState([]);
-  const [trailerUrl, setTrailerUrl] = useState(null);
+  /* const [trailerUrl, setTrailerUrl] = useState(null); */
   const { showCard, setShowCard } = useContext(CardContext)
   
   const { selectedMovie, setSelectedMovie } = useContext(CardContext)
@@ -79,20 +79,16 @@ function Row({ title, fetchURL, isLargeRow }) {
     
 
     if (showCard === true) {
-      console.log('Koca: click  era True', )
       setSelectedMovie(movie)
 
     }
     else{
       setShowCard((prevState) =>{
-        console.log('Koca: click  era False', )
         setShowCard(!prevState)
       })
       setSelectedMovie(movie)
     }
-    
   }
-
 
   return (
 
@@ -104,13 +100,25 @@ function Row({ title, fetchURL, isLargeRow }) {
 
           {movies.map((movie) => (
             <>
-              <img
-                  key = {movie.id}
-                  onClick = { () => handleClick(movie)}
-                  src={`${base_url}${isLargeRow ? movie.poster_path : movie.backdrop_path }`}
-                  alt={movie.name}
-                  className={`row_poster ${isLargeRow && "row_posterLarge"}`}
-                />  
+
+              {movie.backdrop_path ?
+
+                <img
+                key = {movie.id}
+                onClick = { () => handleClick(movie)}
+                src={`${base_url}${isLargeRow ? movie.poster_path : movie.backdrop_path }`}
+                alt={movie.name}
+                className={`row_poster ${isLargeRow && "row_posterLarge"}`}
+                /> 
+                                
+               :
+
+                null
+               
+              }
+
+               
+
             </>
           ))}
         </div>
