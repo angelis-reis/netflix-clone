@@ -62,7 +62,7 @@ function App() {
         <Row title= "Romance Movies" fetchURL={requests.fetchRomanceMovies} />
         <Row title= "Documentaries" fetchURL={requests.fetchDocumentaires} />
 
-        { showCard && <Card selectedMovie={selectedMovie} showCard={showCard} /> }
+        { showCard && <Card selectedMovie={selectedMovie} /> }
 
       </div>
 
