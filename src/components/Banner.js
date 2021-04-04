@@ -1,13 +1,18 @@
-import React, { useState, useEffect } from 'react'
+import React, { useContext, useState, useEffect } from 'react'
 import axios from "axios";
 import requests from "../requests"
-
 import "../styles/banner.css"
+
+import { CardContext }  from "../App"
 
 
 function Banner() {
 
     const [movie, setMovie] = useState([]);
+
+    const { showCard, setShowCard } = useContext(CardContext)
+
+    const { selectedMovie, setSelectedMovie } = useContext(CardContext)
 
     useEffect(() => {
         async function fetchData() {
@@ -17,23 +22,35 @@ function Banner() {
                 request.data.results[
                     Math.floor( Math.random() * request.data.results.length -1)
                 ]
-
             )           
         }
-
-
-        fetchData();
-
-        
+        fetchData();      
 
     }, [requests.fetchTrending]);
-
-    console.log("MOVIE: ",movie);
 
     function truncate(str,n){
         return(
             str?.length > n ? str.substr(0, n - 1) + "..." :  str
         )
+    }
+
+
+    const handleClick = (movie) => {
+    
+
+        if (showCard === true) {
+          console.log('Koca: click  era True', )
+          setSelectedMovie(movie)
+    
+        }
+        else{
+          setShowCard((prevState) =>{
+            console.log('Koca: click  era False', )
+            setShowCard(!prevState)
+          })
+          setSelectedMovie(movie)
+        }
+        
     }
 
 
@@ -60,13 +77,13 @@ function Banner() {
 
                 <div className="banner_buttons">
 
-                    <button className="banner_button">
-                        Play
+                    <button  onClick = { () => handleClick(movie)} className="banner_button">
+                        About
                     </button>
 
-                    <button className="banner_button">
+                    {/* <button className="banner_button">
                         My List
-                    </button>
+                    </button> */}
 
                 </div>
 
