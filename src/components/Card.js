@@ -216,26 +216,6 @@ const genres =
         Thriller : 53,
     }
 
-
-   /*  backdrop_path: "/ta5oblpMlEcIPIS2YGcq9XEkWK2.jpg"
-    ​
-    first_air_date: "2016-01-25"​  release_date
-    genre_ids: Array [ 80, 10765 ]​
-    id: 63174​
-    name: "Lucifer"​
-    origin_country: Array [ "US" ]​
-    original_language: "en"​
-    original_name: "Lucifer"​  original_title
-    overview: "Bored and unhappy as the Lord of Hell, Lucifer Morningstar abandoned his throne and retired to Los Angeles, where he has teamed up with LAPD detective Chloe Decker to take down criminals. But the longer he's away from the underworld, the greater the threat that the worst of humanity could escape."​
-    popularity: 760.397​
-    poster_path: "/4EYPN5mVIhKLfxGruy7Dy41dTVn.jpg"​
-    vote_average: 8.5​
-    vote_count: 8076 */
-
-    
-
-
-
 const Card = ({ selectedMovie }) =>{   
 
     const movieGenreDefinition = () =>{

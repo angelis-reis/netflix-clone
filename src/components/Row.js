@@ -22,7 +22,10 @@ function Row({ title, fetchURL, isLargeRow }) {
     async function fetchData() {
       const request = await axios.get(fetchURL);
       setMovies(request.data.results);
+      console.log('Koca: movies ', movies );
       return request;
+
+      
     }
     fetchData();
     //    tenho que colocar esse props (fetchURL) aqui para que renderize cada vez que eu atualizar o valor dele
@@ -37,7 +40,6 @@ function Row({ title, fetchURL, isLargeRow }) {
     }
   }
 
-  var movieTemp
   /* const handleClick = (movie) => {
     console.log("apertou imagem")
     console.log("movieTemp inicio: ", movieTemp)
@@ -76,11 +78,8 @@ function Row({ title, fetchURL, isLargeRow }) {
   }; */
 
   const handleClick = (movie) => {
-    
-
     if (showCard === true) {
       setSelectedMovie(movie)
-
     }
     else{
       setShowCard((prevState) =>{
