@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useState } from 'react';
 import './styles/App.css';
 import Row from './components/Row';
 import Banner from './components/Banner';

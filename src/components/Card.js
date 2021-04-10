@@ -3,7 +3,7 @@ import { BsFillStarFill } from 'react-icons/bs';
 import styled from 'styled-components';
 import { CardContext } from '../App';
 
-const base_url = 'https://image.tmdb.org/t/p/original/';
+const baseUrl = 'https://image.tmdb.org/t/p/original/';
 
 const StyledCard = styled.div`
 	.card {
@@ -258,7 +258,7 @@ const Card = ({ selectedMovie }) => {
 		<StyledCard>
 			<div className='card'>
 				<div className='card_left'>
-					<img src={`${base_url}${selectedMovie.poster_path}`} />
+					<img src={`${baseUrl}${selectedMovie.poster_path}`} />
 				</div>
 
 				<div className='card_right'>
